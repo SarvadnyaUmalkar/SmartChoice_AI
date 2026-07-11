@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}SmartChoice AI — Decision History{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4 pt-4 pb-5">
+
+  <!-- Page Header -->
+  <div class="row mb-4">
+    <div class="col">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+        <div>
+          <h2 class="page-title mb-1">
+            <i class="bi bi-clock-history me-2 text-primary"></i>Decision History
+          </h2>
+          <p class="text-muted mb-0">Audit trail of all your past decision analyses</p>
+        </div>
+        <div class="d-flex gap-2">
+          <input type="search" class="form-control sc-input" id="historySearch"
+                 placeholder="Search decisions…" style="width:220px">
+          <select class="form-select sc-select" id="historyDomainFilter" style="width:160px">
+            <option value="">All Domains</option>
+            <option value="education">Education</option>
+            <option value="career">Career</option>
+            <option value="investment">Investment</option>
+            <option value="technology">Technology</option>
+            <option value="banking">Banking</option>
+            <option value="insurance">Insurance</option>
+            <option value="business">Business</option>
+            <option value="daily_life">Daily Life</option>
+          </select>
+          <select class="form-select sc-select" id="historyStatusFilter" style="width:140px">
+            <option value="">All Statuses</option>
+            <option value="completed">Completed</option>
+            <option value="active">Active</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="row">
+    <div class="col-12 col-xl-8">
+      <div id="historyTimeline">
+        <div class="text-center py-5">
+          <div class="spinner-border text-primary mb-3" role="status"></div>
+          <p class="text-muted">Loading decision history…</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Side Panel: Selected Decision Detail -->
+    <div class="col-12 col-xl-4" id="historyDetailPanel" style="display:none">
+      <div class="sc-card sticky-top" style="top:80px">
+        <div class="sc-card-header d-flex justify-content-between align-items-center">
+          <h6 class="sc-card-title mb-0"><i class="bi bi-info-circle me-2"></i>Decision Detail</h6>
+          <button class="btn btn-sm btn-icon" id="closeDetailBtn">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="sc-card-body" id="historyDetailContent">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% block title %}SmartChoice AI — Decision Advisor{% endblock %}
+
+{% block content %}
+<div class="sc-chat-layout">
+
+  <!-- ─── Left Sidebar: Session List ───────────────────────────────────── -->
+  <aside class="sc-sidebar" id="chatSidebar">
+    <div class="sidebar-header">
+      <h6 class="sidebar-title">
+        <i class="bi bi-layout-sidebar-inset me-2"></i>Decision Sessions
+      </h6>
+      <button class="btn btn-sm btn-new-session" id="newSessionBtn">
+        <i class="bi bi-plus-lg me-1"></i> New
+      </button>
+    </div>
+
+    <!-- Domain Filter -->
+    <div class="px-3 pb-2">
+      <select class="form-select form-select-sm bg-transparent" id="domainFilterSelect">
+        <option value="">All Domains</option>
+        <option value="education">🎓 Education</option>
+        <option value="career">💼 Career</option>
+        <option value="investment">📈 Investment</option>
+        <option value="technology">💻 Technology</option>
+        <option value="banking">💳 Banking</option>
+        <option value="insurance">🛡️ Insurance</option>
+        <option value="business">🏢 Business</option>
+        <option value="daily_life">🏠 Daily Life</option>
+      </select>
+    </div>
+
+    <div class="session-list" id="sessionList">
+      <div class="session-empty text-center py-4">
+        <i class="bi bi-chat-square-dots fs-2 text-muted mb-2 d-block"></i>
+        <p class="text-muted small">No sessions yet.<br>Start a new decision above.</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ─── Main Chat Area ────────────────────────────────────────────────── -->
+  <section class="sc-chat-main">
+
+    <!-- Chat Header -->
+    <div class="chat-header d-flex align-items-center justify-content-between px-4 py-3">
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-sm btn-icon d-lg-none" id="toggleSidebarBtn">
+          <i class="bi bi-layout-sidebar-inset"></i>
+        </button>
+        <div>
+          <h5 class="chat-session-title mb-0" id="chatSessionTitle">SmartChoice AI Advisor</h5>
+          <small class="text-muted" id="chatSessionDomain">Select a template or type your decision</small>
+        </div>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-sm btn-outline-secondary" id="downloadPdfBtn" style="display:none">
+          <i class="bi bi-file-earmark-pdf me-1"></i> PDF Report
+        </button>
+        <button class="btn btn-sm btn-outline-danger" id="clearChatBtn">
+          <i class="bi bi-trash3 me-1"></i> Clear
+        </button>
+      </div>
+    </div>
+
+    <!-- Welcome Banner (shown when no messages) -->
+    <div class="chat-welcome" id="chatWelcome">
+      <div class="welcome-hero">
+        <div class="hero-icon-ring">
+          <i class="bi bi-cpu-fill"></i>
+        </div>
+        <h2 class="welcome-title">Decision Intelligence Platform</h2>
+        <p class="welcome-subtitle">
+          Powered by IBM Granite · Analytical depth · Unbiased advisory
+        </p>
+      </div>
+
+      <!-- Quick-Start Domain Chips -->
+      <div class="domain-chips-label">Choose a domain to get started</div>
+      <div class="domain-chips" id="domainChips">
+        <button class="domain-chip" data-domain="education" data-prompt="Help me choose the right graduate program. I want to evaluate my options based on ROI, career impact, and program quality.">
+          <span class="chip-icon">🎓</span>
+          <span class="chip-label">Education</span>
+        </button>
+        <button class="domain-chip" data-domain="career" data-prompt="Help me make a career decision. I want to compare different career paths or job opportunities based on growth, compensation, and alignment with my goals.">
+          <span class="chip-icon">💼</span>
+          <span class="chip-label">Career</span>
+        </button>
+        <button class="domain-chip" data-domain="investment" data-prompt="Help me make an investment decision. I want to analyze different investment options based on returns, risk, and my financial goals.">
+          <span class="chip-icon">📈</span>
+          <span class="chip-label">Investment</span>
+        </button>
+        <button class="domain-chip" data-domain="technology" data-prompt="Help me choose the right technology or device. I want a comparison based on performance, value for money, and my specific use case.">
+          <span class="chip-icon">💻</span>
+          <span class="chip-label">Technology</span>
+        </button>
+        <button class="domain-chip" data-domain="banking" data-prompt="Help me evaluate banking or financial products like credit cards, loans, or accounts based on fees, benefits, and my usage pattern.">
+          <span class="chip-icon">💳</span>
+          <span class="chip-label">Banking</span>
+        </button>
+        <button class="domain-chip" data-domain="insurance" data-prompt="Help me select the right insurance plan by comparing coverage, premiums, and alignment with my life stage and risk profile.">
+          <span class="chip-icon">🛡️</span>
+          <span class="chip-label">Insurance</span>
+        </button>
+        <button class="domain-chip" data-domain="business" data-prompt="Help me make a strategic business decision. I need a structured analysis with ROI, risk assessment, and recommendation.">
+          <span class="chip-icon">🏢</span>
+          <span class="chip-label">Business</span>
+        </button>
+        <button class="domain-chip" data-domain="daily_life" data-prompt="Help me make an important everyday decision with a structured analysis of my options.">
+          <span class="chip-icon">🏠</span>
+          <span class="chip-label">Daily Life</span>
+        </button>
+      </div>
+
+      <!-- Decision Templates -->
+      <div class="templates-section mt-4">
+        <div class="templates-label">
+          <i class="bi bi-lightning-fill me-1"></i> Quick-Start Templates
+        </div>
+        <div class="templates-grid" id="templatesGrid">
+          <div class="text-muted small text-center py-2">Loading templates…</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Messages Container -->
+    <div class="chat-messages" id="chatMessages" style="display:none">
+    </div>
+
+    <!-- Typing Indicator -->
+    <div class="typing-indicator" id="typingIndicator" style="display:none">
+      <div class="typing-avatar">
+        <i class="bi bi-cpu-fill"></i>
+      </div>
+      <div class="typing-bubble">
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+      </div>
+      <span class="typing-label">SmartChoice AI is analyzing…</span>
+    </div>
+
+    <!-- Input Area -->
+    <div class="chat-input-area">
+      <!-- Score Cards (shown when analysis exists) -->
+      <div class="score-cards-bar" id="scoreCardsBar" style="display:none"></div>
+
+      <div class="chat-input-wrapper">
+        <div class="chat-input-container">
+          <textarea
+            class="chat-input"
+            id="chatInput"
+            placeholder="Describe your decision… (e.g. 'Should I do an MS or MBA?' or 'Compare SIP vs FD for ₹15K/month')"
+            rows="1"
+            maxlength="4000"
+          ></textarea>
+          <div class="chat-input-actions">
+            <span class="char-counter" id="charCounter">0 / 4000</span>
+            <select class="domain-select-inline" id="activeDomainSelect" title="Active Domain">
+              <option value="">Auto-detect</option>
+              <option value="education">🎓 Education</option>
+              <option value="career">💼 Career</option>
+              <option value="investment">📈 Investment</option>
+              <option value="technology">💻 Technology</option>
+              <option value="banking">💳 Banking</option>
+              <option value="insurance">🛡️ Insurance</option>
+              <option value="business">🏢 Business</option>
+              <option value="daily_life">🏠 Daily Life</option>
+            </select>
+            <button class="btn btn-send" id="sendBtn" disabled>
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </div>
+        </div>
+        <div class="input-hint">
+          Press <kbd>Ctrl</kbd>+<kbd>Enter</kbd> to send · <kbd>Shift</kbd>+<kbd>Enter</kbd> for new line
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── Right Panel: Analysis ─────────────────────────────────────────── -->
+  <aside class="sc-analysis-panel" id="analysisPanel">
+    <div class="analysis-panel-header">
+      <h6 class="mb-0"><i class="bi bi-graph-up-arrow me-2"></i>Decision Analytics</h6>
+      <button class="btn btn-sm btn-icon" id="closePanelBtn">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <!-- Score Cards -->
+    <div class="panel-section" id="panelScores">
+      <div class="section-title">Decision Scores</div>
+      <div id="scoreCardsList" class="score-cards-list">
+        <p class="text-muted small text-center py-3">
+          Scores will appear after analysis
+        </p>
+      </div>
+    </div>
+
+    <!-- Risk Analysis -->
+    <div class="panel-section" id="panelRisks">
+      <div class="section-title">Risk Assessment</div>
+      <div id="riskItemsList">
+        <p class="text-muted small text-center py-3">
+          Risk factors will appear after analysis
+        </p>
+      </div>
+    </div>
+
+    <!-- Chart: Score Comparison -->
+    <div class="panel-section">
+      <div class="section-title">Score Visualization</div>
+      <div class="chart-wrapper">
+        <canvas id="scoreBarChart" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- Comparison Matrix -->
+    <div class="panel-section" id="panelMatrix" style="display:none">
+      <div class="section-title">Comparison Matrix</div>
+      <div class="matrix-scroll-wrapper">
+        <div id="comparisonMatrix"></div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}

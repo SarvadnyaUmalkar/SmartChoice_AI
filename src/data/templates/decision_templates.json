@@ -1,0 +1,90 @@
+[
+  {
+    "id": "career_software_vs_pm",
+    "category": "Career",
+    "icon": "💼",
+    "title": "Software Engineering vs. Product Management",
+    "description": "Compare career trajectories between an SWE and a PM role",
+    "domain": "career",
+    "options": ["Software Engineering", "Product Management"],
+    "context": "I have 3 years of backend dev experience. I'm considering switching to Product Management. My goal is a senior leadership role in 7-10 years. Current CTC: ₹18 LPA. Risk tolerance: medium.",
+    "quick_prompt": "Should I switch from Software Engineering to Product Management after 3 years of experience targeting a senior leadership role in 10 years?"
+  },
+  {
+    "id": "education_ms_vs_mba",
+    "category": "Education",
+    "icon": "🎓",
+    "title": "MS in Data Science vs. MBA in IT",
+    "description": "Evaluate graduate program ROI, placements, and career impact",
+    "domain": "education",
+    "options": ["MS in Data Science", "MBA in IT Management"],
+    "context": "Fresh grad with 2 years experience. Budget: ₹25-40 lakh. Goal: data-driven product leadership or ML engineering. Target: top-10 MNC by age 30.",
+    "quick_prompt": "Should I pursue an MS in Data Science or an MBA in IT Management? Budget: ₹30 lakh, goal is tech leadership by 30."
+  },
+  {
+    "id": "investment_sip_vs_fd",
+    "category": "Investment",
+    "icon": "📈",
+    "title": "Mutual Fund SIP vs. Fixed Deposit",
+    "description": "Compare risk-adjusted returns for surplus fund allocation",
+    "domain": "investment",
+    "options": ["Dynamic Mutual Fund SIP", "Fixed Deposit (Bank)"],
+    "context": "Monthly surplus: ₹15,000. Investment horizon: 5-7 years. Risk tolerance: moderate. Goal: corpus for home down payment. Age: 28.",
+    "quick_prompt": "Should I invest ₹15,000/month in a dynamic Mutual Fund SIP or a Fixed Deposit? 5-year horizon, moderate risk, saving for a home down payment."
+  },
+  {
+    "id": "tech_laptop_coding",
+    "category": "Technology",
+    "icon": "💻",
+    "title": "Laptop Selection for Developer",
+    "description": "Choose the best coding laptop within a ₹75,000 budget",
+    "domain": "technology",
+    "options": ["Laptop A (AMD Ryzen 7, 16GB RAM, ₹65K)", "Laptop B (Intel i7, 16GB RAM, ₹72K)", "Laptop C (Apple M2 Air, 8GB, ₹75K)"],
+    "context": "Full-stack developer. Daily use: VS Code, Docker, multiple browser tabs. Budget: ₹75,000. Preference: battery life and build quality.",
+    "quick_prompt": "Compare the best laptop for coding under ₹75,000 INR: Ryzen 7 16GB vs i7 16GB vs M2 MacBook Air 8GB."
+  },
+  {
+    "id": "banking_credit_card",
+    "category": "Banking",
+    "icon": "💳",
+    "title": "Credit Card Selection",
+    "description": "Evaluate reward structure, fees, and benefits across top cards",
+    "domain": "banking",
+    "options": ["HDFC Regalia Gold", "Axis Bank Magnus", "SBI BPCL Octane"],
+    "context": "Monthly spend: ₹40,000. Top categories: fuel (₹8K), dining (₹10K), online shopping (₹15K). Looking for maximum reward redemption value.",
+    "quick_prompt": "Which credit card is best for monthly spend of ₹40,000 across fuel, dining, and online shopping: HDFC Regalia Gold, Axis Magnus, or SBI BPCL Octane?"
+  },
+  {
+    "id": "loan_fixed_vs_floating",
+    "category": "Banking",
+    "icon": "🏠",
+    "title": "Home Loan: Fixed vs. Floating Rate",
+    "description": "Analyze total interest cost, EMI stability, and prepayment flexibility",
+    "domain": "banking",
+    "options": ["Fixed Rate Home Loan (8.5% p.a.)", "Floating Rate Home Loan (8.1% RLLR-linked)"],
+    "context": "Loan amount: ₹50 lakh. Tenure: 20 years. Expectation: rate cut cycle over next 2 years. Monthly income: ₹1.2 lakh.",
+    "quick_prompt": "Should I choose a Fixed Rate (8.5%) or Floating Rate (8.1%) home loan of ₹50 lakh over 20 years given expected RBI rate cuts?"
+  },
+  {
+    "id": "insurance_term_vs_health",
+    "category": "Insurance",
+    "icon": "🛡️",
+    "title": "Term Insurance vs. Health Insurance Priority",
+    "description": "Determine optimal insurance allocation with limited budget",
+    "domain": "insurance",
+    "options": ["₹1 Cr Term Insurance Plan", "Comprehensive Health Insurance (₹10L coverage)"],
+    "context": "Age: 32, married, one dependent child. Annual insurance budget: ₹30,000. Employer provides basic ₹3L health cover. No existing life cover.",
+    "quick_prompt": "I'm 32 with a family of 3 and a ₹30,000 annual insurance budget. Should I prioritize a ₹1 Cr term plan or comprehensive health insurance first?"
+  },
+  {
+    "id": "business_build_vs_buy",
+    "category": "Business",
+    "icon": "🏢",
+    "title": "Build vs. Buy Software Decision",
+    "description": "Evaluate custom development vs. SaaS for enterprise workflow automation",
+    "domain": "business",
+    "options": ["Build Custom Software", "Buy SaaS Solution", "Hybrid Approach (SaaS + Custom APIs)"],
+    "context": "Mid-size logistics company. 200 users. Budget: ₹40 lakh capex or ₹8 lakh/year opex. Timeline: 6 months. Requirements: 80% standard, 20% custom workflows.",
+    "quick_prompt": "Should a 200-user logistics company build custom workflow software (₹40L capex) or buy a SaaS solution (₹8L/year) with 20% custom needs?"
+  }
+]
